@@ -1,23 +1,11 @@
 <?php
-
-
 include_once('conexion.php');
-
-
-// eliminar registros
-
-$sql = "DELETE FROM usuarios WHERE id = 2";
-
-
-// validación proceso
-
-if ($conexion->query($sql) === TRUE) {
-
-    echo "Eliminación de registro exitosa";
+if(isset($_GET['id'])){
+    $conexion->query("DELETE FROM usuarios WHERE id = ".$_GET['id']);
+    header("location: listar.php");
+    exit();
 } else {
-
-    $conexion->error;
+    echo "ID no válido";
+    header("location: listar.php");
 }
-
-
-$conexion->close();
+?>
