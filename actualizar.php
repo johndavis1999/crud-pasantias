@@ -1,15 +1,18 @@
 <?php
-
 include_once('conexion.php');
-//actualizar registros
 
-$sql = "UPDATE usuarios SET apellido = 'Britto' WHERE id = 1";
+$id = $_REQUEST['id'];
+$nombre = $_REQUEST['nombre'];
+$apellido = $_REQUEST['apellido'];
 
-if (
-    $conexion->query($sql) === TRUE
-) {
+// Construir la consulta de actualización
+$sql = "UPDATE usuarios SET nombre = '$nombre', apellido = '$apellido' WHERE id = $id";
+
+if ($conexion->query($sql) === TRUE) {
     echo "Registro actualizado correctamente";
 } else {
+    echo "Error al actualizar el registro: " . $conexion->error;
+}
 
-    $conexion->error;
-};
+$conexion->close();
+?>
